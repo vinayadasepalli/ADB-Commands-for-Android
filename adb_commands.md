@@ -59,3 +59,13 @@ adb shell wm density [density]: Sets the screen density to the specified value.
 adb shell get-state: Prints the current state of the device.  
 adb shell get-serialno: Prints the serial number of the device.  
 adb shell dumpsys: Dumps system service information.  
+
+### Phone number 
+adb shell 'service call iphonesubinfo 19' \
+    | awk -F "'" '{print $2}' \
+    | tr -d '\n' \
+    | sed 's/\s\+/\n/g' \
+    | tr -d '.' \
+    | awk '{if ($0) print $0; else print "No phone number found"}'
+adb shell am start -a android.intent.action.CALL -d tel:+19998886666
+adb shell am start -a android.intent.action.SENDTO -d sms:+14084261036  --es  sms_body "Test" --ez exit_on_sent True
