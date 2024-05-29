@@ -66,6 +66,6 @@ adb shell 'service call iphonesubinfo 19' \
     | tr -d '\n' \
     | sed 's/\s\+/\n/g' \
     | tr -d '.' \
-    | awk '{if ($0) print $0; else print "No phone number found"}'
-adb shell am start -a android.intent.action.CALL -d tel:+19998886666
-adb shell am start -a android.intent.action.SENDTO -d sms:+14084261036  --es  sms_body "Test" --ez exit_on_sent True
+    | awk '{if ($0) print $0; else print "No phone number found"}'  
+adb shell am start -a android.intent.action.CALL -d tel:+19998886666  
+adb shell am start -a android.intent.action.SENDTO -d sms:+14084261036  --es  sms_body "Test" --ez exit_on_sent True  
